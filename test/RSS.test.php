@@ -7,9 +7,15 @@
       // Charge le flux depuis le réseau
       $rss->update();
 
-      // Affiche le titre
-      echo $rss->titre()."\n";
+     //  // Affiche le titre
+     //  echo $rss->titre()."\n";
+     //
+     //  // Affiche les nouvelles
+     //  var_dump($rss->nouvelle());
 
-      // Affiche les nouvelles
-      var_dump($rss->nouvelle());
+      // Affiche le titre et la description de toutes les nouvelles
+      foreach($rss->nouvelles() as $nouvelle) {
+        echo ' '.$nouvelle->titre().' '.$nouvelle->date()."\n";
+        echo '  '.$nouvelle->description()."\n";
+      }
  ?>
