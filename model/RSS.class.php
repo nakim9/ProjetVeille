@@ -8,7 +8,11 @@ class RSS {
             // Contructeur
             function __construct($url) {
               $this->url = $url;
+<<<<<<< HEAD
               $this->update();
+=======
+
+>>>>>>> 2352bc10bf29b99a0ba358f29b612113b9166fb7
             }
 
 
@@ -47,10 +51,21 @@ class RSS {
 
         // Met à jour les nouvelles dans l'objet
         $array = array();
+<<<<<<< HEAD
         for ($i=1; $i <$nodeList->length ; $i++) {
           $array[$i]=$nodeList->item($i)->textContent;
         }
         $this->nouvelles=$array;
+=======
+        foreach ($nodeList->item() as $key => $value) {
+          $array[]=$key
+        }
+
+
+
+
+
+>>>>>>> 2352bc10bf29b99a0ba358f29b612113b9166fb7
       }
           }
  ?>
