@@ -23,7 +23,7 @@ class RSS {
               return $this->date;
             }
 
-            function nouvelle(){
+            function nouvelles(){
               return $this->nouvelles;
             }
 
@@ -50,7 +50,7 @@ class RSS {
         // Met à jour les nouvelles dans l'objet
         $array = array();
         for ($i=1; $i <$nodeList->length ; $i++) {
-          $array[$i]=$nodeList->item($i)->textContent;
+          $array[$i]=$nodeList->item($i);
         }
         $this->nouvelles=$array;
       }

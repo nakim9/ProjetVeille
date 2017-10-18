@@ -16,6 +16,9 @@ class Nouvelle {
 
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
-        ...
+        $this->titre=$item["nodeValue"];
+        $this->$url=$item["baseURI"]
+        $doc=load($this->url);
+        
       }
  ?>
