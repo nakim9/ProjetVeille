@@ -7,7 +7,7 @@ class Nouvelle {
       private $urlImage;    // URL vers l'image
 
       // Fonctions getter
-
+        )
       function titre() {
           return $this->titre;
       }
@@ -19,6 +19,6 @@ class Nouvelle {
         $this->titre=$item["nodeValue"];
         $this->$url=$item["baseURI"]
         $doc=load($this->url);
-        
+
       }
  ?>
