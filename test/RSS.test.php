@@ -14,7 +14,7 @@
      //  var_dump($rss->nouvelle());
 
       // Affiche le titre et la description de toutes les nouvelles
-    
+
       foreach($rss->nouvelles() as $nouvelle) {
         echo ' '.$nouvelle->titre().' '.$nouvelle->date()."\n";
         echo '  '.$nouvelle->description()."\n";

@@ -40,7 +40,7 @@ class RSS {
         $doc->load($this->url);
 
         // Recupère la liste (DOMNodeList) de tous les elements de l'arbre 'title'
-        $nodeList = $doc->getElementsByTagName('title');
+        $nodeList = $doc->getElementsByTagName('item');
 
         // Met à jour le titre dans l'objet
         $this->titre = $nodeList->item(0)->textContent;
@@ -50,10 +50,11 @@ class RSS {
 
         // Met à jour les nouvelles dans l'objet
 
-        for ($i=1; $i <$nodeList->length ; $i++) {
+        foreach ($nodeList as $nouv) {
           $nouvelle= new Nouvelle;
-          $nouvelle->update($nodeList->item($i));
-          $this->nouvelles[$i]=$nouvelle;
+          $nouvelle->update($nouv);
+          array_push($this->nouvelles,$nouvelle);
+
         }
       }
           }
