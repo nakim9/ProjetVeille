@@ -1,4 +1,5 @@
 <?php
+include ('../model/Nouvelle.class.php');
 class RSS {
             private $titre; // Titre du flux
             private $url;   // Chemin URL pour télécharger un nouvel état du flux
@@ -8,7 +9,7 @@ class RSS {
             // Contructeur
             function __construct($url) {
               $this->url = $url;
-
+              $this->nouvelles=[];
               $this->update();
 
             }
@@ -48,11 +49,12 @@ class RSS {
         //$this->date= now();//marche pas
 
         // Met à jour les nouvelles dans l'objet
-        $array = array();
+
         for ($i=1; $i <$nodeList->length ; $i++) {
-          $array[$i]=$nodeList->item($i);
+          $nouvelle= new Nouvelle;
+          $nouvelle->update($nodeList->item($i));
+          $this->nouvelles[$i]=$nouvelle;
         }
-        $this->nouvelles=$array;
       }
           }
  ?>

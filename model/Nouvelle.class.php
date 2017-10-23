@@ -7,18 +7,26 @@ class Nouvelle {
       private $urlImage;    // URL vers l'image
 
       // Fonctions getter
-        )
+
       function titre() {
           return $this->titre;
       }
+      function date() {
+          return $this->date;
+      }
+      function url() {
+          return $this->url;
+      }
+      function description() {
+          return $this->description;
+      }
 
-      ...
+
 
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
-        $this->titre=$item["nodeValue"];
-        $this->$url=$item["baseURI"]
-        $doc=load($this->url);
-
+        $this->titre=$item->nodeValue;
+        $this->url=$item->baseURI;
       }
+    }
  ?>
