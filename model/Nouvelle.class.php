@@ -12,13 +12,17 @@ class Nouvelle {
           return $this->titre;
       }
 
-      ...
 
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item["nodeValue"];
         $this->$url=$item["baseURI"]
-        $doc=load($this->url);
-        
+
       }
+
+      downloadImage(DOMElement $item, $imageId){
+           $url = $item->url;
+           file_put_contents($imageId,file_get_contents($url));
+      }
+}
  ?>
