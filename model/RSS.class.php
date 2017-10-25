@@ -13,9 +13,6 @@ class RSS {
               $this->update();
 
             }
-
-
-
             function url(){
               return $this->url;
             }
