@@ -28,5 +28,22 @@ class Nouvelle {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
         $this->description=$item->getElementsByTagName('description')->item(0)->textContent;
       }
+
+      function downloadImage(DOMElement $item, $imageId){
+          $nodeList = $item->getElementsByTagName('enclosure');
+          //var_dump($nodeList);
+          $node = $nodeList->item(0)->attributes->getNamedItem('url');
+          //var_dump($node);
+          if ($node != NULL) {
+               // L'attribut url a été trouvé : on récupère sa valeur, c'est l'URL de l'image
+               $url = $node->nodeValue;
+               // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
+               // On suppose que le dossier images existe déjà
+               $imagePath = 'images/'.$imageId.'.jpg'; // Pas besoin de "this"
+               $file = file_get_contents($url);
+               // Écrit le résultat dans le fichier
+               file_put_contents($imagePath, $file);
+          }
+      }
     }
  ?>
