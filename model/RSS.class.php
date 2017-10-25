@@ -54,7 +54,6 @@ class RSS {
           $nouvelle= new Nouvelle;
           $nouvelle->update($nouv);
           array_push($this->nouvelles,$nouvelle);
-
         }
       }
           }
