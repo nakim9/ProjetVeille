@@ -27,7 +27,7 @@ class Nouvelle {
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
         $this->description=$item->getElementsByTagName('description')->item(0)->textContent;
-
+        $this->urlImage=$item->getElementsByTagName('enclosure')->attributes->getNamedItem('url');
       }
     }
  ?>
