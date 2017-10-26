@@ -20,6 +20,7 @@
         if($nouvelle->urlImage()!=NULL) echo "<img src='".$nouvelle->urlImage()."'/>";
         echo '<p>';
         echo ' '.$nouvelle->titre().' '.$nouvelle->date()."\n";
+        echo '</p>';echo '<p>';
         echo '  '.$nouvelle->description()."\n";
         echo '</p>';
       }

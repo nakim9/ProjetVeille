@@ -5,6 +5,7 @@ class RSS {
             private $url;   // Chemin URL pour télécharger un nouvel état du flux
             private $date;  // Date du dernier téléchargement du flux
             private $nouvelles; // Liste des nouvelles du flux dans un tableau d'objets Nouvelle
+            
 
             // Contructeur
             function __construct($url) {
@@ -57,7 +58,7 @@ class RSS {
           //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
         }
-        echo "END";
+        //echo "END";
       }
           }
  ?>
