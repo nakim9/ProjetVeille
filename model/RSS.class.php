@@ -48,12 +48,16 @@ class RSS {
         // Met à jour les nouvelles dans l'objet
 
         foreach ($nodeList as $i => $nouv) {
+          //var_dump($nodeList);
+
           $nouvelle= new Nouvelle;
           $nouvelle->update($nouv);
           array_push($this->nouvelles,$nouvelle);
-          var_dump($nouv);
+          //var_dump($this->nouvelles);
+          //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
         }
+        echo "END";
       }
           }
  ?>
