@@ -51,7 +51,7 @@ class RSS {
           $nouvelle= new Nouvelle;
           $nouvelle->update($nouv);
           array_push($this->nouvelles,$nouvelle);
-          var_dump($nouv);
+          //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
         }
       }
