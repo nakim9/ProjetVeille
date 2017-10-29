@@ -30,36 +30,14 @@ class Nouvelle {
       function id(){
            return $this->id;
       }
-
-      //setter
-      function setUrlImage($url){
-           $this->urlImage = $url;
-      }
-
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
         $this->description=$item->getElementsByTagName('description')->item(0)->textContent;
       }
 
-<<<<<<< HEAD
-    function downloadImage(DOMElement $item, $imageId){
-          $nodeList = $item->getElementsByTagName('enclosure');
-          //var_dump($nodeList);
-          $node = $nodeList->item(0)->attributes->getNamedItem('url');
-          //var_dump($node);
-          if ($node != NULL) {
-               // L'attribut url a été trouvé : on récupère sa valeur, c'est l'URL de l'image
-               $url = $node->nodeValue;
-               // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
-               // On suppose que le dossier images existe déjà
-               $imagePath = '../data/images/'.$imageId.'.jpg'; // Pas besoin de "this"
-               $file = file_get_contents($url);
-               // Écrit le résultat dans le fichier
-               file_put_contents($imagePath, $file);
-=======
       function downloadImage(DOMElement $item, $imageId){
-          if(!(file_exists(LIEN_VERS_IMG.$this->id.'.jpg'))){ //verification que le fichier n'est pas déjà créé
+          if(!(file_exists('images/'.$this->titre.'.jpg'))){ //verification que le fichier n'est pas déjà créé
                //var_dump($item);
                $nodeList = $item->getElementsByTagName('enclosure');
                //var_dump($nodeList);
@@ -71,22 +49,20 @@ class Nouvelle {
                     $this->mkIdIntFromName();//création d'un ID
                     // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
                     // On suppose que le dossier images existe déjà
-                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg');
+                    $this->urlImage = LIEN_VERS_IMG.$this->id.'.jpg';
                     $file = file_get_contents($url);
 
                     //Création d'un dossier images
-                    if(!(file_exists(LIEN_VERS_IMG))) {mkdir(LIEN_VERS_IMG);}
+                    if(!(file_exists('images/'))) {mkdir('images/');}
                     // Écrit le résultat dans le fichier
                     file_put_contents($this->urlImage, $file);
                }
           }
           else{
                if($this->urlImage == NULL){
-                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg'); //lien à l'image quand l'image est déjà créé
+                    $this->urlImage = LIEN_VERS_IMG.$imageId.'.jpg'; //lien à l'image quand l'image est déjà créé
                }
->>>>>>> 5c08c403b82122f97b17732b43aab14c70b3c3a6
           }
-          return $url;
       }
 
       function mkIdStrFromName(){
@@ -112,7 +88,7 @@ class Nouvelle {
            $titre = $this->titre;
            $id = 0;
            for($i = 0; $i<strlen($titre); $i++){
-                $ascii = ord($titre[$i]);//ord — Retourne le code ASCII d'un caractère
+                $ascii = ord($titre[$i]);
                 $id += $ascii;
            }
            if(isset($id)){    $this->id = $id;    }
