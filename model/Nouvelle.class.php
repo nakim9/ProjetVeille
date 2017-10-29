@@ -30,12 +30,6 @@ class Nouvelle {
       function id(){
            return $this->id;
       }
-
-      //setter
-      function setUrlImage($url){
-           $this->urlImage = $url;
-      }
-
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
@@ -55,7 +49,7 @@ class Nouvelle {
                          $url = $node->nodeValue;
                          // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
                          // On suppose que le dossier images existe déjà
-                         $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg');
+                         $this->urlimage = LIEN_VERS_IMG.$this->id.'.jpg';
                          $file = file_get_contents($url);
 
                          //Création d'un dossier images
@@ -66,11 +60,10 @@ class Nouvelle {
                }
                else{
                     if($this->urlImage == NULL && $this->id != NULL){
-                         $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg'); //lien à l'image quand l'image est déjà créé
+                         $this->urlimage = LIEN_VERS_IMG.$this->id.'.jpg'; //lien à l'image quand l'image est déjà créé
                     }
                }
           }
-          return $url;
       }
 
       function mkIdStrFromName(){
@@ -96,7 +89,7 @@ class Nouvelle {
            $titre = $this->titre;
            $id = 0;
            for($i = 0; $i<strlen($titre); $i++){
-                $ascii = ord($titre[$i]);//ord — Retourne le code ASCII d'un caractère
+                $ascii = ord($titre[$i]);
                 $id += $ascii;
            }
            if(isset($id)){    $this->id = $id;    }

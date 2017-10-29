@@ -6,6 +6,7 @@ class RSS {
             private $date;  // Date du dernier téléchargement du flux
             private $nouvelles; // Liste des nouvelles du flux dans un tableau d'objets Nouvelle
 
+
             // Contructeur
             function __construct($url) {
               $this->url = $url;
@@ -55,7 +56,7 @@ class RSS {
 
         // Met à jour les nouvelles dans l'objet
 
-        foreach ($nodeList as $i => $nouv) {
+        foreach ($nodeList as $i => $nouv) {//parcour tout les elements du flux rss
           //var_dump($nodeList);
 
           $nouvelle= new Nouvelle;
@@ -63,7 +64,8 @@ class RSS {
           array_push($this->nouvelles,$nouvelle);
           $nouvelle->downloadImage($nouv, $i);
         }
+
         //echo "END";
       }
-}
+          }
  ?>
