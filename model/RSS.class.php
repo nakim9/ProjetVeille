@@ -48,12 +48,12 @@ class RSS {
 
         // Met à jour les nouvelles dans l'objet
 
-        foreach ($nodeList as $i => $nouv) {
+        foreach ($nodeList as $i => $nouv) {//parcour tout les elements du flux rss
           //var_dump($nodeList);
 
           $nouvelle= new Nouvelle;
-          $nouvelle->update($nouv);
-          array_push($this->nouvelles,$nouvelle);
+          $nouvelle->update($nouv);//creation d'une nouvelle
+          array_push($this->nouvelles,$nouvelle);//nouvelle insserer dans le vecteur nouvelles
           //var_dump($this->nouvelles);
           //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
