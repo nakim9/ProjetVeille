@@ -30,6 +30,12 @@ class Nouvelle {
       function id(){
            return $this->id;
       }
+
+      //setter
+      function setUrlImage($url){
+           $this->urlImage = $url;
+      }
+
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
@@ -37,7 +43,7 @@ class Nouvelle {
       }
 
       function downloadImage(DOMElement $item, $imageId){
-          if(!(file_exists('images/'.$this->titre.'.jpg'))){ //verification que le fichier n'est pas déjà créé
+          if(!(file_exists(LIEN_VERS_IMG.$this->id.'.jpg'))){ //verification que le fichier n'est pas déjà créé
                //var_dump($item);
                $nodeList = $item->getElementsByTagName('enclosure');
                //var_dump($nodeList);
@@ -49,20 +55,21 @@ class Nouvelle {
                     $this->mkIdIntFromName();//création d'un ID
                     // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
                     // On suppose que le dossier images existe déjà
-                    $this->urlImage = LIEN_VERS_IMG.$this->id.'.jpg';
+                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg');
                     $file = file_get_contents($url);
 
                     //Création d'un dossier images
-                    if(!(file_exists('images/'))) {mkdir('images/');}
+                    if(!(file_exists(LIEN_VERS_IMG))) {mkdir(LIEN_VERS_IMG);}
                     // Écrit le résultat dans le fichier
                     file_put_contents($this->urlImage, $file);
                }
           }
           else{
                if($this->urlImage == NULL){
-                    $this->urlImage = LIEN_VERS_IMG.$imageId.'.jpg'; //lien à l'image quand l'image est déjà créé
+                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg'); //lien à l'image quand l'image est déjà créé
                }
           }
+          return $url;
       }
 
       function mkIdStrFromName(){
@@ -88,7 +95,7 @@ class Nouvelle {
            $titre = $this->titre;
            $id = 0;
            for($i = 0; $i<strlen($titre); $i++){
-                $ascii = ord($titre[$i]);
+                $ascii = ord($titre[$i]);//ord — Retourne le code ASCII d'un caractère
                 $id += $ascii;
            }
            if(isset($id)){    $this->id = $id;    }
