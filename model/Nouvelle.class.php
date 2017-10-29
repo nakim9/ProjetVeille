@@ -1,6 +1,6 @@
 <?php
 
-define("LIEN_VERS_IMG",'images/');
+define("LIEN_VERS_IMG",'..\data\images/');
 
 class Nouvelle {
       private $titre;   // Le titre
@@ -30,6 +30,24 @@ class Nouvelle {
       function id(){
            return $this->id;
       }
+      // Fonctions setter
+
+      function setTitre($t) {
+          $this->titre = $t;
+      }
+      function setDate($d) {
+          $this->date = $d;
+      }
+      function setUrl($u) {
+          $this->url = $u;
+      }
+      function setDescription($d) {
+          $this->description = $d;
+      }
+      function setUrlImage($i) {
+          $this->urlImage = $i;
+      }
+
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
@@ -49,7 +67,7 @@ class Nouvelle {
                          $url = $node->nodeValue;
                          // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
                          // On suppose que le dossier images existe déjà
-                         $this->urlimage = LIEN_VERS_IMG.$this->id.'.jpg';
+                         $this->urlImage = LIEN_VERS_IMG.$this->id.'.jpg';
                          $file = file_get_contents($url);
 
                          //Création d'un dossier images
@@ -60,12 +78,13 @@ class Nouvelle {
                }
                else{
                     if($this->urlImage == NULL && $this->id != NULL){
-                         $this->urlimage = LIEN_VERS_IMG.$this->id.'.jpg'; //lien à l'image quand l'image est déjà créé
+                         $this->urlImage = LIEN_VERS_IMG.$this->id.'.jpg'; //lien à l'image quand l'image est déjà créé
                     }
                }
           }
       }
 
+      //Créer un ID de type string à partir du nom de la nouvelle
       function mkIdStrFromName(){
            $titre = $this->titre;
            $idLength = 0;
@@ -84,7 +103,7 @@ class Nouvelle {
            else{    echo'<p>Nouvelle.class.php : mkIdFromName :'.$this->titre.' id non créé</p>';   }
 
       }
-
+      //Créer un ID de type integer à partir du nom de la nouvelle
       function mkIdIntFromName(){
            $titre = $this->titre;
            $id = 0;

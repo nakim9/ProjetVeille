@@ -5,7 +5,7 @@ class RSS {
             private $url;   // Chemin URL pour télécharger un nouvel état du flux
             private $date;  // Date du dernier téléchargement du flux
             private $nouvelles; // Liste des nouvelles du flux dans un tableau d'objets Nouvelle
-
+            private $id;
 
             // Contructeur
             function __construct($url) {
@@ -30,12 +30,20 @@ class RSS {
               return $this->titre;
             }
 
+            function id() {
+              return $this->id;
+            }
+
             function setTitre($t){
                  $this->titre = $t;
             }
 
             function setDate($d){
                  $this->date = $d;
+            }
+
+            function setID($i){
+                 $this->id = $i;
             }
             // Récupère un flux à partir de son URL
       function update() {
@@ -52,7 +60,7 @@ class RSS {
         $this->titre = $nodeList->item(0)->textContent;
 
         // Met à jour la date dans l'objet
-        $this->date= date('l jS \of F Y h:i:s A'); //retourn la date sous la forme "Sunday 29th of October 2017 09:23:53 AM"
+        $this->date= date(DateTime::W3C); //retourn la date sous la forme "Sunday 29th of October 2017 09:23:53 AM"
 
         // Met à jour les nouvelles dans l'objet
 

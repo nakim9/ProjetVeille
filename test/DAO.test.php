@@ -3,7 +3,7 @@
      require_once('..\data\DAO.class.php');
 
      // Test si l'URL existe dans la BD
-     $url = 'https://confrerie-des-traducteurs.fr/skyrim/rss';
+     $url = 'http://www.lemonde.fr/m-actu/rss_full.xml';
      $dao = new DAO();
      $rss = $dao->readRSSfromURL($url);
 
@@ -17,5 +17,9 @@
      // Mise à jour du flux
      $rss->update();
      $nouvelles = $rss->nouvelles();
+     foreach ($nouvelles as $value) {
+          //$dao->createNouvelle($value,$rss->id());
+          $dao->readNouvellefromTitre($value->titre(),$rss->id());
+     }
      require_once('..\view\vue.php');
 ?>

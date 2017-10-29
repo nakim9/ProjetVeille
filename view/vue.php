@@ -8,7 +8,7 @@
     <?php foreach ($nouvelles as $nouv): ?>
       <h3><?php  echo $nouv->titre(); ?></h3>
       <p><?php echo $nouv->description(); ?></p>
-      <img src="../controler/images/<?php echo $nouv->id(); ?>.jpg" alt="">
+      <img src="<?php echo $nouv->urlImage(); ?>" alt="">
     <?php endforeach; ?>
   </body>
 </html>
