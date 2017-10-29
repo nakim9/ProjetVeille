@@ -58,6 +58,7 @@ class RSS {
           //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
         }
+
         //echo "END";
       }
           }
