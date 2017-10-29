@@ -1,10 +1,13 @@
 <?php
+
+include('RSS.class.php');
+
 class DAO {
         private $db; // L'objet de la base de donnée
 
         // Ouverture de la base de donnée
         function __construct() {
-          $dsn = 'sqlite:rss.db'; // Data source name
+          $dsn = 'sqlite:..\model\rss.db'; // Data source name
           try {
             $this->db = new PDO($dsn);
           } catch (PDOException $e) {
@@ -39,7 +42,19 @@ class DAO {
 
         // Acces à un objet RSS à partir de son URL
         function readRSSfromURL($url) {
-          ...
+          $rss = NULL;
+          $q = "SELECT * FROM RSS WHERE url='$url'";
+
+          $r = $this->db->query($q);
+          $tabRSS = $r->fetchall();
+
+          if($tabRSS != NULL){
+               $tabRSS = $tabRSS[0];
+               $rss = new RSS($url);
+               $rss->setTitre($tabRSS['titre']);
+               $rss->setDate($tabRSS['date']);
+          }
+          return $rss;
         }
 
         // Met à jour un flux
@@ -63,12 +78,13 @@ class DAO {
 
         // Acces à une nouvelle à partir de son titre et l'ID du flux
         function readNouvellefromTitre($titre,$RSS_id) {
-          ...
+             return 0;
         }
 
         // Crée une nouvelle dans la base à partir d'un objet nouvelle
         // et de l'id du flux auquelle elle appartient
         function createNouvelle(Nouvelle $n, $RSS_id) {
-          ...
+               return 0;
         }
+   }
 ?>

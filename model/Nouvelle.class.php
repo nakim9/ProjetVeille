@@ -40,33 +40,34 @@ class Nouvelle {
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
         $this->description=$item->getElementsByTagName('description')->item(0)->textContent;
+        $this->date=$item->getElementsByTagName('pubDate')->item(0)->textContent;
+        $this->mkIdIntFromName();//création d'un ID
       }
 
       function downloadImage(DOMElement $item, $imageId){
-          if(!(file_exists(LIEN_VERS_IMG.$this->id.'.jpg'))){ //verification que le fichier n'est pas déjà créé
-               //var_dump($item);
-               $nodeList = $item->getElementsByTagName('enclosure');
-               //var_dump($nodeList);
+          $nodeList = $item->getElementsByTagName('enclosure');
+          $url = NULL;
+          if($nodeList->length != NULL){
                $node = $nodeList->item(0)->attributes->getNamedItem('url');
-               //var_dump($node);
-               if ($node != NULL) {
-                    // L'attribut url a été trouvé : on récupère sa valeur, c'est l'URL de l'image
-                    $url = $node->nodeValue;
-                    $this->mkIdIntFromName();//création d'un ID
-                    // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
-                    // On suppose que le dossier images existe déjà
-                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg');
-                    $file = file_get_contents($url);
+               if(!(file_exists(LIEN_VERS_IMG.$this->id.'.jpg'))){ //verification que le fichier n'est pas déjà créé
+                    if ($node != NULL) {
+                         // L'attribut url a été trouvé : on récupère sa valeur, c'est l'URL de l'image
+                         $url = $node->nodeValue;
+                         // On construit un nom local pour cette image : on suppose que $nomLocalImage contient un identifiant unique
+                         // On suppose que le dossier images existe déjà
+                         $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg');
+                         $file = file_get_contents($url);
 
-                    //Création d'un dossier images
-                    if(!(file_exists(LIEN_VERS_IMG))) {mkdir(LIEN_VERS_IMG);}
-                    // Écrit le résultat dans le fichier
-                    file_put_contents($this->urlImage, $file);
+                         //Création d'un dossier images
+                         if(!(file_exists(LIEN_VERS_IMG))) {mkdir(LIEN_VERS_IMG);}
+                         // Écrit le résultat dans le fichier
+                         file_put_contents($this->urlImage, $file);
+                    }
                }
-          }
-          else{
-               if($this->urlImage == NULL){
-                    $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg'); //lien à l'image quand l'image est déjà créé
+               else{
+                    if($this->urlImage == NULL && $this->id != NULL){
+                         $this->setUrlImage(LIEN_VERS_IMG.$this->id.'.jpg'); //lien à l'image quand l'image est déjà créé
+                    }
                }
           }
           return $url;

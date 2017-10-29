@@ -10,7 +10,7 @@ class RSS {
             function __construct($url) {
               $this->url = $url;
               $this->nouvelles=[];
-              $this->update();
+              //$this->update();
 
             }
             function url(){
@@ -28,6 +28,14 @@ class RSS {
             function titre() {
               return $this->titre;
             }
+
+            function setTitre($t){
+                 $this->titre = $t;
+            }
+
+            function setDate($d){
+                 $this->date = $d;
+            }
             // Récupère un flux à partir de son URL
       function update() {
         // Cree un objet pour accueillir le contenu du RSS : un document XML
@@ -43,7 +51,7 @@ class RSS {
         $this->titre = $nodeList->item(0)->textContent;
 
         // Met à jour la date dans l'objet
-        //$this->date= now();//marche pas
+        $this->date= date('l jS \of F Y h:i:s A'); //retourn la date sous la forme "Sunday 29th of October 2017 09:23:53 AM"
 
         // Met à jour les nouvelles dans l'objet
 
@@ -53,8 +61,6 @@ class RSS {
           $nouvelle= new Nouvelle;
           $nouvelle->update($nouv);
           array_push($this->nouvelles,$nouvelle);
-          //var_dump($this->nouvelles);
-          //var_dump($nouv);
           $nouvelle->downloadImage($nouv, $i);
         }
         //echo "END";
