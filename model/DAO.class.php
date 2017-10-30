@@ -59,6 +59,7 @@ class DAO {
           return $rss;
         }
 
+
         // Met à jour un flux
         function updateRSS(RSS $rss) {
           // Met à jour uniquement le titre et la date
@@ -119,6 +120,20 @@ class DAO {
           } catch (PDOException $e) {
                die("PDO Error :".$e->getMessage());
           }
+     }
+
+     function getFlux(){
+       $q="SELECT id,url FROM RSS";
+       $r = $this->db->query($q);
+       $tabRSS = $r->fetchall();
+       return  $tabRSS;
+     }
+
+     function getNouvelles(int $RSS_id){
+       $q="SELECT titre,id,description,image,url FROM nouvelle where RSS_id='$RSS_id'";
+       $r = $this->db->query($q);
+       $tabRSS = $r->fetchall();
+       return  $tabRSS;
      }
    }
 ?>

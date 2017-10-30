@@ -7,6 +7,6 @@ $rss = new RSS('http://www.lemonde.fr/m-actu/rss_full.xml');
 // Charge le flux depuis le réseau
 $rss->update();
 
-$nouvells = $rss->nouvelles();
-require_once('../view/vue.php');
+$nouvelles = $rss->nouvelles();
+require_once('../view/affiche_nouvelles.view.php');
  ?>

@@ -6,7 +6,7 @@
   </head>
   <body>
     <?php foreach ($nouvelles as $nouv): ?>
-      <h3><?php  echo $nouv->titre(); ?></h3>
+      <h3><a href="<?php echo $nouv->url(); ?>"><?php  echo $nouv->titre(); ?></a></h3>
       <p><?php echo $nouv->description(); ?></p>
       <img src="<?php echo $nouv->urlImage(); ?>" alt="">
     <?php endforeach; ?>

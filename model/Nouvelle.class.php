@@ -47,13 +47,18 @@ class Nouvelle {
       function setUrlImage($i) {
           $this->urlImage = $i;
       }
+      function setID($i) {
+          $this->id = $i;
+      }
 
       // Charge les attributs de la nouvelle avec les informations du noeud XML
       function update(DOMElement $item) {
         $this->titre=$item->getElementsByTagName('title')->item(0)->textContent;
         $this->description=$item->getElementsByTagName('description')->item(0)->textContent;
         $this->date=$item->getElementsByTagName('pubDate')->item(0)->textContent;
+        $this->url=$item->getElementsByTagName('link')->item(0)->textContent;
         $this->mkIdIntFromName();//création d'un ID
+
       }
 
       function downloadImage(DOMElement $item, $imageId){

@@ -1,5 +1,5 @@
 <?php
-include ('../model/Nouvelle.class.php');
+include('../model/Nouvelle.class.php');
 class RSS {
             private $titre; // Titre du flux
             private $url;   // Chemin URL pour télécharger un nouvel état du flux
@@ -11,7 +11,7 @@ class RSS {
             function __construct($url) {
               $this->url = $url;
               $this->nouvelles=[];
-              //$this->update();
+              $this->update();
 
             }
             function url(){
@@ -45,6 +45,7 @@ class RSS {
             function setID($i){
                  $this->id = $i;
             }
+            
             // Récupère un flux à partir de son URL
       function update() {
         // Cree un objet pour accueillir le contenu du RSS : un document XML
@@ -66,11 +67,11 @@ class RSS {
 
         foreach ($nodeList as $i => $nouv) {//parcour tout les elements du flux rss
           //var_dump($nodeList);
-
           $nouvelle= new Nouvelle;
           $nouvelle->update($nouv);
           array_push($this->nouvelles,$nouvelle);
           $nouvelle->downloadImage($nouv, $i);
+
         }
 
         //echo "END";
